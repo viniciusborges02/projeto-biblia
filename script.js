@@ -1,77 +1,90 @@
 const livros = {
-    "Gênesis": 50, "Êxodo": 40, "Levítico": 27, "Números": 36, "Deuteronômio": 34,
-    "Josué": 24, "Juízes": 21, "Rute": 4, "1 Samuel": 31, "2 Samuel": 24,
-    "1 Reis": 22, "2 Reis": 25, "1 Crônicas": 29, "2 Crônicas": 36,
-    "Esdras": 10, "Neemias": 13, "Ester": 10, "Jó": 42, "Salmos": 150,
-    "Provérbios": 31, "Eclesiastes": 12, "Cantares": 8, "Isaías": 66,
-    "Jeremias": 52, "Lamentações": 5, "Ezequiel": 48, "Daniel": 12,
-    "Oseias": 14, "Joel": 3, "Amós": 9, "Obadias": 1, "Jonas": 4,
-    "Miquéias": 7, "Naum": 3, "Habacuque": 3, "Sofonias": 3,
-    "Ageu": 2, "Zacarias": 14, "Malaquias": 4,
-    "Mateus": 28, "Marcos": 16, "Lucas": 24, "João": 21,
-    "Atos": 28, "Romanos": 16, "1 Coríntios": 16, "2 Coríntios": 13,
-    "Gálatas": 6, "Efésios": 6, "Filipenses": 4, "Colossenses": 4,
-    "1 Tessalonicenses": 5, "2 Tessalonicenses": 3, "1 Timóteo": 6, "2 Timóteo": 4,
-    "Tito": 3, "Filemom": 1, "Hebreus": 13, "Tiago": 5,
-    "1 Pedro": 5, "2 Pedro": 3, "1 João": 5, "2 João": 1,
-    "3 João": 1, "Judas": 1, "Apocalipse": 22
-  };
-  
-  
-  const livroSelect = document.getElementById('livro');
-  const capituloSelect = document.getElementById('capitulo');
-  const versiculoSelect = document.getElementById('versiculo');
-  const textoDiv = document.getElementById('texto');
-  
-  // Preenche os livros
-  for (let livro in livros) {
-    let option = new Option(livro, livro);
-    livroSelect.add(option);
-  }
-  
-  // Atualiza capítulos ao escolher livro
-  livroSelect.addEventListener('change', () => {
-    capituloSelect.innerHTML = '';
-    const numCapitulos = livros[livroSelect.value];
-    for (let i = 1; i <= numCapitulos; i++) {
-      capituloSelect.add(new Option(i, i));
-    }
-    capituloSelect.dispatchEvent(new Event('change'));
+  // Antigo Testamento
+  "Gênesis": { cap: 50, testamento: "antigo", api: "Genesis" },
+  "Êxodo": { cap: 40, testamento: "antigo", api: "Exodus" },
+  "Levítico": { cap: 27, testamento: "antigo", api: "Leviticus" },
+  "Números": { cap: 36, testamento: "antigo", api: "Numbers" },
+  "Deuteronômio": { cap: 34, testamento: "antigo", api: "Deuteronomy" },
+  "Josué": { cap: 24, testamento: "antigo", api: "Joshua" },
+  "Juízes": { cap: 21, testamento: "antigo", api: "Judges" },
+  "Rute": { cap: 4, testamento: "antigo", api: "Ruth" },
+  "1 Samuel": { cap: 31, testamento: "antigo", api: "1 Samuel" },
+  "2 Samuel": { cap: 24, testamento: "antigo", api: "2 Samuel" },
+  "1 Reis": { cap: 22, testamento: "antigo", api: "1 Kings" },
+  "2 Reis": { cap: 25, testamento: "antigo", api: "2 Kings" },
+  "1 Crônicas": { cap: 29, testamento: "antigo", api: "1 Chronicles" },
+  "2 Crônicas": { cap: 36, testamento: "antigo", api: "2 Chronicles" },
+  "Esdras": { cap: 10, testamento: "antigo", api: "Ezra" },
+  "Neemias": { cap: 13, testamento: "antigo", api: "Nehemiah" },
+  "Ester": { cap: 10, testamento: "antigo", api: "Esther" },
+  "Jó": { cap: 42, testamento: "antigo", api: "Job" },
+  "Salmos": { cap: 150, testamento: "antigo", api: "Psalms" },
+  "Provérbios": { cap: 31, testamento: "antigo", api: "Proverbs" },
+  "Eclesiastes": { cap: 12, testamento: "antigo", api: "Ecclesiastes" },
+  "Cânticos": { cap: 8, testamento: "antigo", api: "Song of Solomon" },
+  "Isaías": { cap: 66, testamento: "antigo", api: "Isaiah" },
+  "Jeremias": { cap: 52, testamento: "antigo", api: "Jeremiah" },
+  "Lamentações": { cap: 5, testamento: "antigo", api: "Lamentations" },
+  "Ezequiel": { cap: 48, testamento: "antigo", api: "Ezekiel" },
+  "Daniel": { cap: 12, testamento: "antigo", api: "Daniel" },
+  "Oseias": { cap: 14, testamento: "antigo", api: "Hosea" },
+  "Joel": { cap: 3, testamento: "antigo", api: "Joel" },
+  "Amós": { cap: 9, testamento: "antigo", api: "Amos" },
+  "Obadias": { cap: 1, testamento: "antigo", api: "Obadiah" },
+  "Jonas": { cap: 4, testamento: "antigo", api: "Jonah" },
+  "Miquéias": { cap: 7, testamento: "antigo", api: "Micah" },
+  "Naum": { cap: 3, testamento: "antigo", api: "Nahum" },
+  "Habacuque": { cap: 3, testamento: "antigo", api: "Habakkuk" },
+  "Sofonias": { cap: 3, testamento: "antigo", api: "Zephaniah" },
+  "Ageu": { cap: 2, testamento: "antigo", api: "Haggai" },
+  "Zacarias": { cap: 14, testamento: "antigo", api: "Zechariah" },
+  "Malaquias": { cap: 4, testamento: "antigo", api: "Malachi" },
+
+  // Novo Testamento
+  "Mateus": { cap: 28, testamento: "novo", api: "Matthew" },
+  "Marcos": { cap: 16, testamento: "novo", api: "Mark" },
+  "Lucas": { cap: 24, testamento: "novo", api: "Luke" },
+  "João": { cap: 21, testamento: "novo", api: "John" },
+  "Atos": { cap: 28, testamento: "novo", api: "Acts" },
+  "Romanos": { cap: 16, testamento: "novo", api: "Romans" },
+  "1 Coríntios": { cap: 16, testamento: "novo", api: "1 Corinthians" },
+  "2 Coríntios": { cap: 13, testamento: "novo", api: "2 Corinthians" },
+  "Gálatas": { cap: 6, testamento: "novo", api: "Galatians" },
+  "Efésios": { cap: 6, testamento: "novo", api: "Ephesians" },
+  "Filipenses": { cap: 4, testamento: "novo", api: "Philippians" },
+  "Colossenses": { cap: 4, testamento: "novo", api: "Colossians" },
+  "1 Tessalonicenses": { cap: 5, testamento: "novo", api: "1 Thessalonians" },
+  "2 Tessalonicenses": { cap: 3, testamento: "novo", api: "2 Thessalonians" },
+  "1 Timóteo": { cap: 6, testamento: "novo", api: "1 Timothy" },
+  "2 Timóteo": { cap: 4, testamento: "novo", api: "2 Timothy" },
+  "Tito": { cap: 3, testamento: "novo", api: "Titus" },
+  "Filemom": { cap: 1, testamento: "novo", api: "Philemon" },
+  "Hebreus": { cap: 13, testamento: "novo", api: "Hebrews" },
+  "Tiago": { cap: 5, testamento: "novo", api: "James" },
+  "1 Pedro": { cap: 5, testamento: "novo", api: "1 Peter" },
+  "2 Pedro": { cap: 3, testamento: "novo", api: "2 Peter" },
+  "1 João": { cap: 5, testamento: "novo", api: "1 John" },
+  "2 João": { cap: 1, testamento: "novo", api: "2 John" },
+  "3 João": { cap: 1, testamento: "novo", api: "3 John" },
+  "Judas": { cap: 1, testamento: "novo", api: "Jude" },
+  "Apocalipse": { cap: 22, testamento: "novo", api: "Revelation" }
+};
+
+
+const antigoDiv = document.getElementById("antigo");
+const novoDiv = document.getElementById("novo");
+
+for (let nome in livros) {
+  const btn = document.createElement("button");
+  btn.textContent = nome;
+  const { cap, api, testamento } = livros[nome];
+  btn.addEventListener("click", () => {
+    window.location.href = `capitulos.html?livro=${encodeURIComponent(nome)}&capitulos=${cap}&api=${api}`;
   });
-  
-  // Atualiza versículos ao escolher capítulo
-  capituloSelect.addEventListener('change', () => {
-    versiculoSelect.innerHTML = '';
-    // Como a API não fornece o número de versículos, limitamos a 50 por padrão
-    const versiculosPadrao = 50;
-    for (let i = 1; i <= versiculosPadrao; i++) {
-      versiculoSelect.add(new Option(i, i));
-    }
-  });
-  
-  // Ler o versículo usando Bible-API
-  async function lerVersiculo() {
-    const livro = livroSelect.value;
-    const capitulo = capituloSelect.value;
-    const versiculo = versiculoSelect.value;
-    const url = `https://bible-api.com/${livro}+${capitulo}:${versiculo}?translation=almeida`;
-  
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-  
-      if (data.text) {
-        textoDiv.innerText = `${data.reference}: ${data.text}`;
-      } else {
-        textoDiv.innerText = "Versículo não encontrado.";
-      }
-    } catch (error) {
-      textoDiv.innerText = "Erro ao buscar o versículo.";
-      console.error(error);
-    }
+  if (testamento === "antigo") {
+    antigoDiv.appendChild(btn);
+  } else {
+    novoDiv.appendChild(btn);
   }
-  
-  // Inicializa ao carregar
-  livroSelect.dispatchEvent(new Event('change'));
-  
+}
 

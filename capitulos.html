@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capítulos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+    }
+    .chapter-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4a90e2;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #357abd;
+    }
+    #verses {
+      margin-top: 30px;
+      padding: 15px;
+      background: white;
+      border-radius: 5px;
+    }
+    @media (max-width: 600px) {
+      .chapter-list {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="livroTitulo">Capítulos</h1>
+  <div class="chapter-list" id="capitulos"></div>
+  <div class="section" id="verses"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const livro = params.get('livro');
+    const api = params.get('api');
+    const capitulos = parseInt(params.get('capitulos'));
+
+    const titulo = document.getElementById('livroTitulo');
+    const capitulosDiv = document.getElementById('capitulos');
+    const versesDiv = document.getElementById('verses');
+
+    if (!livro || !api || !capitulos) {
+      titulo.textContent = "Livro não selecionado";
+    } else {
+      titulo.textContent = livro;
+      for (let i = 1; i <= capitulos; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.addEventListener("click", () => carregarVersiculos(api, i));
+        capitulosDiv.appendChild(btn);
+      }
+    }
+
+    async function carregarVersiculos(livroApi, capitulo) {
+      versesDiv.innerHTML = "Carregando...";
+      try {
+        // Corrigido aqui: "+" entre livro e capítulo
+        const response = await fetch(`https://bible-api.com/${encodeURIComponent(livroApi)}+${capitulo}?translation=almeida`);
+        const data = await response.json();
+        if (data.verses) {
+          versesDiv.innerHTML = data.verses.map(v => `<p><strong>${v.verse}.</strong> ${v.text}</p>`).join("");
+        } else {
+          versesDiv.innerHTML = "Versículos não encontrados.";
+        }
+      } catch (error) {
+        console.error(error);
+        versesDiv.innerHTML = "Erro ao carregar versículos.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
